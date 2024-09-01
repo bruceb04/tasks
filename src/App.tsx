@@ -7,7 +7,7 @@ function App(): React.JSX.Element {
             <header className="App-header">
                 UD CISC275 with React Hooks and TypeScript by Bruce Bermel
             </header>
-            <p>Green background too!</p>
+            <p>Green background too! Hello World!</p>
         </div>
     );
 }
