@@ -5,7 +5,8 @@
  * the number twice.
  */
 export function bookEndList(numbers: number[]): number[] {
-    return numbers;
+    if (numbers.length == 0) return [];
+    else return [numbers[0], numbers.slice(-1)[0]];
 }
 
 /**
@@ -13,7 +14,7 @@ export function bookEndList(numbers: number[]): number[] {
  * number has been tripled (multiplied by 3).
  */
 export function tripleNumbers(numbers: number[]): number[] {
-    return numbers;
+    return numbers.map((num: number) => num * 3);
 }
 
 /**
@@ -21,7 +22,7 @@ export function tripleNumbers(numbers: number[]): number[] {
  * the number cannot be parsed as an integer, convert it to 0 instead.
  */
 export function stringsToIntegers(numbers: string[]): number[] {
-    return [];
+    return numbers.map((num: string) => (isNaN(Number(num)) ? 0 : Number(num)));
 }
 
 /**
@@ -32,7 +33,11 @@ export function stringsToIntegers(numbers: string[]): number[] {
  */
 // Remember, you can write functions as lambdas too! They work exactly the same.
 export const removeDollars = (amounts: string[]): number[] => {
-    return [];
+    const amCopy = [...amounts];
+
+    return amCopy
+        .map((str: string) => (str.charAt(0) == "$" ? str.slice(1) : str))
+        .map((num: string) => (isNaN(Number(num)) ? 0 : Number(num)));
 };
 
 /**
@@ -41,7 +46,12 @@ export const removeDollars = (amounts: string[]): number[] => {
  * in question marks ("?").
  */
 export const shoutIfExclaiming = (messages: string[]): string[] => {
-    return [];
+    const clonedMessages = [...messages];
+    return clonedMessages
+        .filter((message: string) => message.slice(-1)[0] != "?")
+        .map((message: string) =>
+            message.slice(-1)[0] == "!" ? message.toUpperCase() : message,
+        );
 };
 
 /**
@@ -49,7 +59,10 @@ export const shoutIfExclaiming = (messages: string[]): string[] => {
  * 4 letters long.
  */
 export function countShortWords(words: string[]): number {
-    return 0;
+    const wordsClone = [...words];
+    return wordsClone
+        .map((word: string) => (word.length < 4 ? 1 : 0))
+        .reduce((currentTotal: number, num: number) => currentTotal + num, 0);
 }
 
 /**
@@ -58,7 +71,14 @@ export function countShortWords(words: string[]): number {
  * then return true.
  */
 export function allRGB(colors: string[]): boolean {
-    return false;
+    return colors.reduce(
+        (currentBool: boolean, currentItem: string) =>
+            (currentItem == "red" ||
+                currentItem == "blue" ||
+                currentItem == "green") &&
+            currentBool,
+        true,
+    );
 }
 
 /**
@@ -69,7 +89,18 @@ export function allRGB(colors: string[]): boolean {
  * And the array [] would become "0=0".
  */
 export function makeMath(addends: number[]): string {
-    return "";
+    const addendsClone = [...addends];
+    const addendsClone2 = [...addends];
+    const sum = addendsClone.reduce(
+        (currentTotal: number, num: number) => currentTotal + num,
+        0,
+    );
+    const adds = addendsClone2.reduce(
+        (currentStr: string, num: number) => currentStr + num.toString() + "+",
+        "",
+    );
+    let toReturn = sum + "=" + (adds ? adds : "0\\");
+    return toReturn.slice(0, toReturn.length - 1);
 }
 
 /**
@@ -82,5 +113,23 @@ export function makeMath(addends: number[]): string {
  * And the array [1, 9, 7] would become [1, 9, 7, 17]
  */
 export function injectPositive(values: number[]): number[] {
-    return [];
+    const firstNegativeIndex = values.findIndex((value: number) => value < 0);
+    const toReturn = [...values];
+    if (firstNegativeIndex >= 0) {
+        const toReturn = [...values];
+        const valuesClone = toReturn.slice(0, firstNegativeIndex);
+        console.log(valuesClone);
+        const sum = valuesClone.reduce(
+            (currentTotal: number, num: number) => currentTotal + num,
+            0,
+        );
+        toReturn.splice(firstNegativeIndex + 1, 0, sum);
+        return toReturn;
+    }
+    const sum = toReturn.reduce(
+        (currentTotal: number, num: number) => currentTotal + num,
+        0,
+    );
+    toReturn.push(sum);
+    return toReturn;
 }
