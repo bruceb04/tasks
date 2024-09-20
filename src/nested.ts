@@ -1,5 +1,6 @@
 import { Answer } from "./interfaces/answer";
 import { Question, QuestionType } from "./interfaces/question";
+import { duplicateQuestion, makeBlankQuestion } from "./objects";
 
 /**
  * Consumes an array of questions and returns a new array with only the questions
@@ -155,7 +156,10 @@ export function publishAll(questions: Question[]): Question[] {
  * are the same type. They can be any type, as long as they are all the SAME type.
  */
 export function sameType(questions: Question[]): boolean {
-    return false;
+    for (let i = 0; i < questions.length - 1; i++) {
+        if (questions[i].type != questions[i + 1].type) return false;
+    }
+    return true;
 }
 
 /***
@@ -169,7 +173,7 @@ export function addNewQuestion(
     name: string,
     type: QuestionType,
 ): Question[] {
-    return [];
+    return [...questions, makeBlankQuestion(id, name, type)];
 }
 
 /***
@@ -182,7 +186,10 @@ export function renameQuestionById(
     targetId: number,
     newName: string,
 ): Question[] {
-    return [];
+    return questions.map((question: Question) => {
+        if (question.id == targetId) return { ...question, name: newName };
+        return question;
+    });
 }
 
 /***
@@ -197,7 +204,15 @@ export function changeQuestionTypeById(
     targetId: number,
     newQuestionType: QuestionType,
 ): Question[] {
-    return [];
+    return questions.map((question: Question) => {
+        if (question.id == targetId) {
+            if (newQuestionType != "multiple_choice_question")
+                return { ...question, type: newQuestionType, options: [] };
+            return { ...question, type: newQuestionType };
+        }
+
+        return question;
+    });
 }
 
 /**
@@ -216,7 +231,21 @@ export function editOption(
     targetOptionIndex: number,
     newOption: string,
 ): Question[] {
-    return [];
+    return questions.map((question: Question) => {
+        if (question.id == targetId) {
+            if (targetOptionIndex == -1) {
+                return {
+                    ...question,
+                    options: [...question.options, newOption],
+                };
+            }
+            const tempQO = [...question.options];
+            tempQO[targetOptionIndex] = newOption;
+            return { ...question, options: tempQO };
+        }
+
+        return question;
+    });
 }
 
 /***
@@ -230,5 +259,11 @@ export function duplicateQuestionInArray(
     targetId: number,
     newId: number,
 ): Question[] {
-    return [];
+    const questionsReturn = [];
+    for (let i = 0; i < questions.length; i++) {
+        questionsReturn.push(questions[i]);
+        if (questions[i].id == targetId)
+            questionsReturn.push(duplicateQuestion(newId, questions[i]));
+    }
+    return questionsReturn;
 }
