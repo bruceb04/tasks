@@ -2,5 +2,20 @@ import React, { useState } from "react";
 import { Button } from "react-bootstrap";
 
 export function RevealAnswer(): React.JSX.Element {
-    return <div>Reveal Answer</div>;
+    const [visible, setVisible] = useState(false);
+
+    return (
+        <div>
+            Reveal Answer
+            <Button
+                onClick={() => {
+                    setVisible(!visible);
+                }}
+            >
+                {" "}
+                Reveal Answer
+            </Button>
+            {visible ? "42" : null}
+        </div>
+    );
 }
