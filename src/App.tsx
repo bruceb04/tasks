@@ -7,8 +7,11 @@ import { StartAttempt } from "./components/StartAttempt";
 import { TwoDice } from "./components/TwoDice";
 import { ChangeType } from "./components/ChangeType";
 import { CycleHoliday } from "./components/CycleHoliday";
-
-let listStuff = ["Item 1", "Item 2", "Item 3"];
+import { Counter } from "./components/Counter";
+import { DoubleHalf } from "./bad-components/DoubleHalf";
+import { ColoredBox } from "./bad-components/ColoredBox";
+import { ShoveBox } from "./bad-components/ShoveBox";
+import { ChooseTeam } from "./bad-components/ChooseTeam";
 
 function App(): React.JSX.Element {
     return (
@@ -28,35 +31,14 @@ function App(): React.JSX.Element {
                     ))}
                 </ul>
             </header>
-            <Container>
-                <Row>
-                    <Col
-                        style={{
-                            width: "50%",
-                            height: "50%",
-                            backgroundColor: "red",
-                        }}
-                    >
-                        Column 1
-                    </Col>
-                    <Col
-                        style={{
-                            width: "50%",
-                            height: "50%",
-                            backgroundColor: "red",
-                        }}
-                    >
-                        Column 2
-                    </Col>
-                </Row>
-            </Container>
-            <h1>
-                <img
-                    src="https://cdn.discordapp.com/attachments/1197987199371718768/1223349837831868560/IMG_7579.jpg?ex=66da0352&is=66d8b1d2&hm=4c0bc7c8c68952f0635f30868e16bc868233c563178bfba50737aa9ce3d48a71&"
-                    alt="A breathtaking performance"
-                />
-            </h1>
-            <p>Green background too! Hello World!</p>
+            <hr></hr>
+            {/* <DoubleHalf></DoubleHalf> */}
+            <hr></hr>
+            <ChooseTeam></ChooseTeam>
+            <hr></hr>
+            <ColoredBox></ColoredBox>
+            <hr></hr>
+            <ShoveBox></ShoveBox>
             <hr></hr>
             <Counter />
             <hr />
