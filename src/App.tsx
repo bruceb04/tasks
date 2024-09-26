@@ -1,7 +1,6 @@
 import React from "react";
 import "./App.css";
-import { Button, Col, Container, Row } from "react-bootstrap";
-import { Counter } from "./components/Counter";
+import { Button } from "react-bootstrap";
 import { RevealAnswer } from "./components/RevealAnswer";
 import { StartAttempt } from "./components/StartAttempt";
 import { TwoDice } from "./components/TwoDice";
@@ -25,14 +24,9 @@ function App(): React.JSX.Element {
                 >
                     Log Hello World
                 </Button>
-                <ul>
-                    {listStuff.map((element, index) => (
-                        <li key={index}>{element}</li>
-                    ))}
-                </ul>
             </header>
             <hr></hr>
-            {/* <DoubleHalf></DoubleHalf> */}
+            <DoubleHalf></DoubleHalf>
             <hr></hr>
             <ChooseTeam></ChooseTeam>
             <hr></hr>
