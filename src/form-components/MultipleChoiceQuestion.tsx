@@ -1,9 +1,6 @@
-import React, { useState } from "react";
+import React from "react";
 
-export function MultipleChoiceQuestion({
-    options,
-    expectedAnswer,
-}: {
+export function MultipleChoiceQuestion({}: {
     options: string[];
     expectedAnswer: string;
 }): React.JSX.Element {
