@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { Button } from "react-bootstrap";
 
 export function MultipleChoiceQuestion({
     options,
@@ -14,6 +15,11 @@ export function MultipleChoiceQuestion({
             <h3>{bruh}</h3>
             <h3>{options}</h3>
             <h3>{expectedAnswer}</h3>
+            <Button
+                onClick={() => {
+                    setBruh("0");
+                }}
+            ></Button>
         </div>
     );
 }
