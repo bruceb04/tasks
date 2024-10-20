@@ -12,9 +12,9 @@ export function GiveAttempts(): React.JSX.Element {
             <Form.Control
                 type="number"
                 value={delta}
-                onChange={(event: React.ChangeEvent<HTMLInputElement>) =>
-                    setDelta(event.target.value)
-                }
+                onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
+                    setDelta(event.target.value);
+                }}
             />
             <button
                 disabled={attempts <= 0}
